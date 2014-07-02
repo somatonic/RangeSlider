@@ -75,7 +75,10 @@ class InputfieldRangeSlider extends Inputfield {
 			$set .= "$( '#RangeSlider_{$this->name}_display2' ).text( '$this->prefix' + $( '#RangeSlider_$this->name div' ).slider( 'values', 1 ) + '$this->suffix' );";
 
 		} else {
-			$out .= "<input type='hidden' name='{$this->name}' id='Inputfield_" . $this->name . "1' value='" . $value->min . "'/>";
+			
+			$hiddenValue = isset($this->defaultValue) ? $this->defaultValue : $value->min;
+			
+			$out .= "<input type='hidden' name='{$this->name}' id='Inputfield_" . $this->name . "1' value='" . $hiddenValue . "'/>";
 
 			$display = "$( '#RangeSlider_{$this->name}_display1' ).text( '$this->prefix' + ui.value + '$this->suffix');";
 
