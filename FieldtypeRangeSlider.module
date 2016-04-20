@@ -109,7 +109,13 @@ class FieldtypeRangeSlider extends Fieldtype {
 	public function sanitizeValue(Page $page, Field $field, $value) {
 
 		// if(!$value instanceof RangeSlider) $value = $this->getBlankValue($page, $field);
-		if(!is_array($value)) $value = $this->getBlankValue($page, $field);
+		if(!is_array($value)) {
+			$range = $this->getBlankValue($page, $field);
+			if (!$field->isrange) {
+				$range['min'] = $value;
+			}
+			$value = $range;
+		}
 
 		// report any changes to the field values
 		// if($value->isChanged('min') || $value->isChanged('max')) $page->trackChange($field->name);
